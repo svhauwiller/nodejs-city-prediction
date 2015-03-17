@@ -9,8 +9,16 @@
 				var commentObj = {};
 				commentObj.Name = $("#Name").val();
                                 commentObj.Comment = $("#Comment").val();
-				$.post(commentUrl, JSON.stringify(commentObj), function(data, textStatus){
-					$("#status").text(textStatus);
+				var dataStr = JSON.stringify(commentObj);
+				$.ajax({
+					url: commentUrl,
+					type: "POST",
+					data: dataStr,
+					dataType: "json",
+					contentType: "application/json",
+					success: function(){
+						$("status").text("Success!");
+					}
 				});
 				$("#json").text(JSON.stringify(commentObj));
 			});
